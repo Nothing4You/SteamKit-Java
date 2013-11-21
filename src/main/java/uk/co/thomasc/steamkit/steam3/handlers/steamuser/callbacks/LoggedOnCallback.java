@@ -80,6 +80,21 @@ public final class LoggedOnCallback extends CallbackMsg {
 	 */
 	@Getter private Steam2Ticket steam2Ticket;
 
+	/**
+	 * Gets a value indicating whether the client should use PICS.
+	 */
+	@Getter private final boolean usePICS;
+
+	/**
+	 * Gets the WebAPI authentication user nonce.
+	 */
+	@Getter private final String webAPIUserNonce;
+
+	/**
+	 * Gets the IP country code.
+	 */
+	@Getter private final String IpCountryCode;
+
 	public LoggedOnCallback(CMsgClientLogonResponse resp) {
 		result = EResult.f(resp.getEresult());
 		extendedResult = EResult.f(resp.getEresultExtended());
@@ -98,6 +113,12 @@ public final class LoggedOnCallback extends CallbackMsg {
 		emailDomain = resp.getEmailDomain();
 
 		cellId = resp.getCellId();
+
+		usePICS = resp.getUsePics();
+
+		webAPIUserNonce = resp.getWebapiAuthenticateUserNonce();
+
+		IpCountryCode = resp.getIpCountryCode();
 
 		if (resp.getSteam2Ticket() != ByteString.EMPTY) {
 			steam2Ticket = new Steam2Ticket(resp.getSteam2Ticket().toByteArray());
