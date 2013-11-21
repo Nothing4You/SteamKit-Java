@@ -3,3 +3,4 @@ src/main/java/uk/co/thomasc/steamkit/base/generated
 .idea
 *.sw*
 steamkit.iml
+target/
