@@ -2,3 +2,4 @@ src/main/proto/generated
 src/main/java/uk/co/thomasc/steamkit/base/generated
 .idea
 *.sw*
+steamkit.iml
