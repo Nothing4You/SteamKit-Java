@@ -5,8 +5,12 @@ import java.util.HashMap;
 public enum EEconTradeResponse {
 	Accepted(0),
 	Declined(1),
+    @Deprecated
 	VacBannedInitiator(2),
+    TradeBannedInitiator(2),
+    @Deprecated // Use TradeBannedTarget
 	VacBannedTarget(3),
+    TradeBannedTarget(3),
 	TargetAlreadyTrading(4),
 	Disabled(5),
 	NotLoggedIn(6),
@@ -14,11 +18,30 @@ public enum EEconTradeResponse {
 	TooSoon(8),
 	TooSoonPenalty(9),
 	ConnectionFailed(10),
-	InitiatorAlreadyTrading(11),
+    @Deprecated // Use AlreadyTrading
+    InitiatorAlreadyTrading(11),
+    AlreadyTrading(11),
+    @Deprecated // Use AlreadyHasTradeRequest
 	Error(12),
-	Timeout(13), ;
+    AlreadyHasTradeRequest(12),
+    @Deprecated // Use NoResponse
+	Timeout(13),
+    NoResponse(13),
+    CyberCafeInitiator(14),
+    CyberCafeTarget(15),
+    SchoolLabInitiator(16),
+    SchoolLabTarget(16),
+    InitiatorBlockedTarget(18),
+    InitiatorNeedsVerifiedEmail(20),
+    InitiatorNeedsSteamGuard(21),
+    TargetAccountCannotTrade(22),
+    InitiatorSteamGuardDuration(23),
+    // TODO: Figure out what this mysterious 25 is...
+    Unknown(25),
+    OKToDeliver(50);
 
 	private int code;
+
 
 	private EEconTradeResponse(int code) {
 		this.code = code;
