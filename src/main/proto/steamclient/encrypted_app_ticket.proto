@@ -1,3 +1,4 @@
+option java_outer_classname = "EncryptedAppticket";
 message EncryptedAppTicket {
 	optional uint32 ticket_version_no = 1;
 	optional uint32 crc_encryptedticket = 2;

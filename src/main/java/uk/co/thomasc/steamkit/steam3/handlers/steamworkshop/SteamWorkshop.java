@@ -10,11 +10,8 @@ import uk.co.thomasc.steamkit.base.generated.SteammessagesClientserver.CMsgClien
 import uk.co.thomasc.steamkit.base.generated.SteammessagesClientserver.CMsgClientUCMEnumerateUserPublishedFilesResponse;
 import uk.co.thomasc.steamkit.base.generated.SteammessagesClientserver.CMsgClientUCMEnumerateUserSubscribedFiles;
 import uk.co.thomasc.steamkit.base.generated.SteammessagesClientserver.CMsgClientUCMEnumerateUserSubscribedFilesResponse;
-import uk.co.thomasc.steamkit.base.generated.SteammessagesClientserver.CMsgClientUCMGetPublishedFileDetails;
-import uk.co.thomasc.steamkit.base.generated.SteammessagesClientserver.CMsgClientUCMGetPublishedFileDetailsResponse;
 import uk.co.thomasc.steamkit.base.generated.steamlanguage.EMsg;
 import uk.co.thomasc.steamkit.steam3.handlers.ClientMsgHandler;
-import uk.co.thomasc.steamkit.steam3.handlers.steamworkshop.callbacks.PublishedFileDetailsCallback;
 import uk.co.thomasc.steamkit.steam3.handlers.steamworkshop.callbacks.PublishedFilesCallback;
 import uk.co.thomasc.steamkit.steam3.handlers.steamworkshop.callbacks.UserActionPublishedFilesCallback;
 import uk.co.thomasc.steamkit.steam3.handlers.steamworkshop.callbacks.UserPublishedFilesCallback;
@@ -34,15 +31,9 @@ public final class SteamWorkshop extends ClientMsgHandler {
 	 * @param publishedFileId	The file ID being requested.
 	 * @return The Job ID of the request. This can be used to find the appropriate {@link JobCallback}.
 	 */
+    @Deprecated
 	public JobID requestPublishedFileDetails(long publishedFileId) {
-		final ClientMsgProtobuf<CMsgClientUCMGetPublishedFileDetails.Builder> request = new ClientMsgProtobuf<CMsgClientUCMGetPublishedFileDetails.Builder>(CMsgClientUCMGetPublishedFileDetails.class, EMsg.ClientUCMGetPublishedFileDetails);
-		request.setSourceJobID(getClient().getNextJobID());
-
-		request.getBody().setPublishedFileId(publishedFileId);
-
-		getClient().send(request);
-
-		return request.getSourceJobID();
+        return JobID.Invalid;
 	}
 
 	/**
@@ -146,9 +137,6 @@ public final class SteamWorkshop extends ClientMsgHandler {
 			case ClientUCMEnumeratePublishedFilesByUserActionResponse:
 				handleEnumPublishedFilesByAction(packetMsg);
 				break;
-			case ClientUCMGetPublishedFileDetailsResponse:
-				handlePublishedFileDetails(packetMsg);
-				break;
 		}
 	}
 
@@ -181,14 +169,6 @@ public final class SteamWorkshop extends ClientMsgHandler {
 
 		final UserActionPublishedFilesCallback innerCallback = new UserActionPublishedFilesCallback(response.getBody().build());
 		final JobCallback<?> callback = new JobCallback<UserActionPublishedFilesCallback>(response.getTargetJobID(), innerCallback);
-		getClient().postCallback(callback);
-	}
-
-	void handlePublishedFileDetails(IPacketMsg packetMsg) {
-		final ClientMsgProtobuf<CMsgClientUCMGetPublishedFileDetailsResponse.Builder> details = new ClientMsgProtobuf<CMsgClientUCMGetPublishedFileDetailsResponse.Builder>(CMsgClientUCMGetPublishedFileDetailsResponse.class, packetMsg);
-
-		final PublishedFileDetailsCallback innerCallback = new PublishedFileDetailsCallback(details.getBody().build());
-		final JobCallback<?> callback = new JobCallback<PublishedFileDetailsCallback>(new JobID(packetMsg.getTargetJobID()), innerCallback);
 		getClient().postCallback(callback);
 	}
 }
