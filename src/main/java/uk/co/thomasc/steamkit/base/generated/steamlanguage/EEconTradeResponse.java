@@ -36,8 +36,8 @@ public enum EEconTradeResponse {
     InitiatorNeedsSteamGuard(21),
     TargetAccountCannotTrade(22),
     InitiatorSteamGuardDuration(23),
-    // TODO: Figure out what this mysterious 25 is...
-    Unknown(25),
+    ResetPasswordTooRecently(24),
+    SteamGuardNewDeviceDuration(25),
     OKToDeliver(50);
 
 	private int code;
