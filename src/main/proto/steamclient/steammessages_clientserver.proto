@@ -89,6 +89,8 @@ message CMsgClientLogon {
 	optional string machine_name = 96;
 	optional string machine_name_userchosen = 97;
 	optional string country_override = 98;
+	optional bool is_steam_box = 99;
+	optional uint64 client_instance_id = 100;
 }
 
 message CMsgClientLogonResponse {
@@ -112,6 +114,8 @@ message CMsgClientLogonResponse {
 	optional bytes parental_setting_signature = 23;
 	optional int32 count_loginfailures_to_migrate = 24;
 	optional int32 count_disconnects_to_migrate = 25;
+	optional int32 ogs_data_report_time_window = 26;
+	optional uint64 client_instance_id = 27;
 }
 
 message CMsgClientRequestWebAPIAuthenticateUserNonce {
@@ -420,6 +424,7 @@ message CMsgClientIsLimitedAccount {
 	optional bool bis_limited_account = 1;
 	optional bool bis_community_banned = 2;
 	optional bool bis_locked_account = 3;
+	optional bool bis_limited_account_allowed_to_invite_friends = 4;
 }
 
 message CMsgClientRequestFriendData {
@@ -2547,13 +2552,13 @@ message CMsgClientFriendUserStatusPublished {
 
 message CMsgClientServiceMethod {
 	optional string method_name = 1;
-	optional string serialized_method = 2;
+	optional bytes serialized_method = 2;
 	optional bool is_notification = 3;
 }
 
 message CMsgClientServiceMethodResponse {
 	optional string method_name = 1;
-	optional string serialized_method_response = 2;
+	optional bytes serialized_method_response = 2;
 }
 
 message CMsgClientUIMode {
@@ -2567,6 +2572,7 @@ message CMsgClientVanityURLChangedNotification {
 message CMsgClientAuthorizeLocalDeviceRequest {
 	optional string device_description = 1;
 	optional uint32 owner_account_id = 2;
+	optional bool limited_only = 3;
 }
 
 message CMsgClientAuthorizeLocalDevice {
@@ -2690,7 +2696,7 @@ message CMsgClientPlayingSessionState {
 	optional uint32 playing_app = 3;
 }
 
-message CMsgClientPlayingSessionKick {
+message CMsgClientKickPlayingSession {
 	optional bool only_stop_game = 1;
 }
 
