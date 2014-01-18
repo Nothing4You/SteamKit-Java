@@ -1,5 +1,4 @@
-SteamKit-Java
-=============
+## SteamKit-Java
 SteamKit-Java, is a java port of a library written for interfacing directly with various parts of the Steam network.
 
 The major connection functionality exists, but there are plenty of functions I haven't tested yet.
@@ -13,3 +12,6 @@ You can test it with:
     System.out.println(Cipher.getMaxAllowedKeyLength("AES"));
 
 If that prints 128, you don't have JCE installed properly and a test will fail.
+
+## I'm too lazy to compile all of that crap
+If my jenkins is up it'll be building the jars: http://mine.fernferret.com:8080/job/SteamKit-Java%20(My%20Fork)/
