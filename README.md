@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Nothing4You/SteamKit-Java.png?branch=master)](https://travis-ci.org/Nothing4You/SteamKit-Java)
+
 ### SteamKit-Java
 SteamKit-Java, is a java port of a library written for interfacing directly with various parts of the Steam network.
 
